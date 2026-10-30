@@ -531,7 +531,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
 <!-- 1 · PORTADA -->
 <section class="hero2" id="inicio">
   <div class="bg" aria-hidden="true">
-    <video class="on" src="hero.mp4" poster="p3.jpg" muted loop playsinline autoplay></video>
+    <video class="on" src="hero.mp4" poster="p3.jpg" muted loop playsinline autoplay preload="auto"></video>
     <video src="v4.mp4" poster="p4.jpg" muted loop playsinline preload="metadata"></video>
     <video src="v1.mp4" poster="p1.jpg" muted loop playsinline preload="metadata"></video>
     <video src="v6.mp4" poster="p6.jpg" muted loop playsinline preload="metadata"></video>
@@ -602,12 +602,12 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
       <h2 class="hd" style="margin-top:14px"><span class="se"><i>Galería de</i></span> <b>contenidos</b></h2>
     </div>
     <div class="vgrid">
-      <div class="vcard rv" data-k="viajes"><button class="vid" type="button" aria-label="Activar sonido: hotel con vista"><video src="v3.mp4" poster="p3.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Hotel con vista</b><span>Viajes</span></div></div>
+      <div class="vcard rv" data-k="viajes"><button class="vid" type="button" aria-label="Activar sonido: hoteles y destinos"><video src="v3.mp4" poster="p3.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Hoteles y destinos</b><span>Viajes</span></div></div>
       <div class="vcard rv" data-k="belleza"><button class="vid" type="button" aria-label="Activar sonido: skincare"><video src="v4.mp4" poster="p4.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Rutina de skincare</b><span>Belleza</span></div></div>
-      <div class="vcard rv" data-k="maternidad"><button class="vid" type="button" aria-label="Activar sonido: juego con mi bebé"><video src="v1.mp4" poster="p1.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Juego con mi bebé</b><span>Maternidad</span></div></div>
-      <div class="vcard rv" data-k="viajes"><button class="vid" type="button" aria-label="Activar sonido: desayuno"><video src="v5.mp4" poster="p5.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Desayuno en restaurante</b><span>Viajes · Food</span></div></div>
-      <div class="vcard rv" data-k="lifestyle"><button class="vid" type="button" aria-label="Activar sonido: rutina de noche"><video src="v6.mp4" poster="p6.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>10 minutos antes de dormir</b><span>Lifestyle</span></div></div>
-      <div class="vcard rv" data-k="belleza"><button class="vid" type="button" aria-label="Activar sonido: look"><video src="v2.mp4" poster="p2.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Look del día</b><span>Belleza · Moda</span></div></div>
+      <div class="vcard rv" data-k="maternidad"><button class="vid" type="button" aria-label="Activar sonido: esenciales mamá y bebé"><video src="v1.mp4" poster="p1.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Esenciales mamá y bebé</b><span>Maternidad</span></div></div>
+      <div class="vcard rv" data-k="viajes"><button class="vid" type="button" aria-label="Activar sonido: restaurant review"><video src="v5.mp4" poster="p5.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Restaurant review / recommendations</b><span>Viajes · Food</span></div></div>
+      <div class="vcard rv" data-k="lifestyle"><button class="vid" type="button" aria-label="Activar sonido: rutinas diarias"><video src="v6.mp4" poster="p6.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Rutinas diarias</b><span>Lifestyle</span></div></div>
+      <div class="vcard rv" data-k="belleza"><button class="vid" type="button" aria-label="Activar sonido: beauty tips"><video src="v2.mp4" poster="p2.jpg" muted loop playsinline preload="metadata"></video><span class="snd" aria-hidden="true">♪</span></button><div class="vmeta"><b>Beauty tips</b><span>Belleza · Moda</span></div></div>
     </div>
   </div>
 </section>
@@ -816,6 +816,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
 })();
 </script>
 <script>(function(){var g=document.querySelector('.wgrid');if(!g)return;if(!('IntersectionObserver' in window)){g.classList.add('on');return;}g.classList.add('pre');var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){g.classList.remove('pre');g.classList.add('on');io.disconnect();}})},{threshold:.2});io.observe(g);})();</script>
+<script>(function(){function kick(){[].forEach.call(document.querySelectorAll('video'),function(v){v.setAttribute('playsinline','');var hero=v.closest('.hero2');if(hero&&!v.classList.contains('on'))return;var r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight){var p=v.play();if(p&&p.catch)p.catch(function(){});}});}
+['touchend','click','keydown'].forEach(function(e){document.addEventListener(e,kick,{once:true,passive:true});});document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});window.addEventListener('pageshow',kick);kick();window.addEventListener('load',kick);[].forEach.call(document.querySelectorAll('.hero2 video.on'),function(v){v.addEventListener('canplay',kick,{once:true});});})();</script>
 
 </body>
 </html>
